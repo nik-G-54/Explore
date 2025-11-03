@@ -440,7 +440,7 @@ const Map = ({
             lng: weatherPoint.coord.lon,
           }
 
-          const iconUrl = `http://openweathermap.org/img/w/${weatherPoint.weather[0].icon}.png`
+          const iconUrl = `https://openweathermap.org/img/w/${weatherPoint.weather[0].icon}.png`
 
           const hasGoogle = typeof window !== 'undefined' && window.google && window.google.maps
 
