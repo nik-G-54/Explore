@@ -5,11 +5,11 @@ Thumbs.db
 
 # Logs
 # ... existing code ...
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+# *.log
+# npm-debug.log*
+# yarn-debug.log*
+# yarn-error.log*
+# pnpm-debug.log*
 
 # Env files (never commit secrets)
 # ... existing code ...
@@ -41,9 +41,9 @@ build/
 
 # Frontend specific
 # ... existing code ...
-travelAdvisor/public/*.mp4
-travelAdvisor/.cache/
-travelAdvisor/.vite/
+# # travelAdvisor/public/*.mp4
+# travelAdvisor/.cache/
+# travelAdvisor/.vite/
 
 # Backend specific
 # ... existing code ...
