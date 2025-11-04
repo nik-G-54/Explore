@@ -180,7 +180,7 @@ const AddEditTravelStory = ({
         <div>
           <div className="flex items-center gap-3 bg-cyan-50/50 p-2 rounded-l-lg">
             {type === "add" ? (
-              <button class="btn-small" onClick={handleAddOrUpdateClick}>
+              <button className="btn-small" onClick={handleAddOrUpdateClick}>
                 <IoMdAdd className="text-lg" /> ADD STORY
               </button>
             ) : (
@@ -195,7 +195,7 @@ const AddEditTravelStory = ({
               </>
             )}
 
-            <button class="" onClick={onClose}>
+            <button className="" onClick={onClose}>
               <IoMdClose className="text-xl text-slate-400" />
             </button>
           </div>

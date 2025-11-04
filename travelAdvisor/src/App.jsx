@@ -31,6 +31,7 @@ import Landing from "./pages/Landing"
 import PrivateRoute from "./Scomponent/PrivateRoute"
 import Place from './place/Place'
 import Chat from './chatboat/Chat'
+import Groupchat from "./groupchat/Groupchat"
 const App = () => {
   return (
     <>
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/places" element={<Place/>} />
           <Route path="/Place" element={<Place/>} />
           <Route path="/Chat" element={<Chat/>} />
+          <Route path="/Groupchat" element={<Groupchat/>} />
         </Routes>
       </BrowserRouter>
     </>

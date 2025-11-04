@@ -25,16 +25,16 @@ const Place = () => {
   const googleApiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY ?? ''
   const hasGoogleApiKey = Boolean(googleApiKey)
 
-  console.log('🗺️ Google Maps API Key:', googleApiKey ? 'Present' : 'Missing')
-  console.log('🗺️ Has Google API Key:', hasGoogleApiKey)
+  console.log(' Google Maps API Key:', googleApiKey ? 'Present' : 'Missing')
+  console.log(' Has Google API Key:', hasGoogleApiKey)
 
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: googleApiKey,
     libraries,
   })
 
-  console.log('🗺️ Maps loaded:', isLoaded)
-  console.log('🗺️ Load error:', loadError)
+  console.log(' Maps loaded:', isLoaded)
+  console.log(' Load error:', loadError)
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -74,10 +74,10 @@ const Place = () => {
   const prevTypeRef = useRef(null)
 
   useEffect(() => {
-    console.log('📊 Data fetch effect triggered')
-    console.log('📊 Current bounds:', bounds)
-    console.log('📊 Current coords:', coords)
-    console.log('📊 Current type:', type)
+    console.log(' Data fetch effect triggered')
+    console.log(' Current bounds:', bounds)
+    console.log(' Current coords:', coords)
+    console.log(' Current type:', type)
 
     if (!bounds?.ne || !bounds?.sw) {
       console.warn('⚠️ Missing bounds, skipping data fetch')
@@ -291,3 +291,5 @@ const Place = () => {
 }
 
 export default Place
+
+

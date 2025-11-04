@@ -10,7 +10,55 @@ import userRoutes from "./routes/user.route.js"
 import travelStoryRoutes from "./routes/travelStory.route.js"
 import { fileURLToPath } from "url"
 
+
+const app = express()
+
 dotenv.config()
+// from here we add group chat ......................................
+import { createServer } from 'node:http';
+
+import { Server } from 'socket.io';
+
+
+
+const server = createServer(app);
+
+const io = new Server(server, {
+    cors: {
+        origin: '*',
+    }, 
+});
+
+const ROOM = 'group';
+
+io.on('connection', (socket) => {
+    console.log('a user connected', socket.id);
+
+    socket.on('joinRoom', async (userName) => {
+        console.log(`${userName} is joining the group.`);
+
+        await socket.join(ROOM);
+
+        // send to all
+        // io.to(ROOM).emit('roomNotice', userName);
+
+        // broadcast
+        socket.to(ROOM).emit('roomNotice', userName);
+    });
+
+    socket.on('chatMessage', (msg) => {
+        socket.to(ROOM).emit('chatMessage', msg);
+    });
+
+    socket.on('typing', (userName) => {
+        socket.to(ROOM).emit('typing', userName);
+    });
+
+    socket.on('stopTyping', (userName) => {
+        socket.to(ROOM).emit('stopTyping', userName);
+    });
+});
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
@@ -20,26 +68,24 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(err)
   })
 
-const app = express()
-
 // Enable CORS for frontend(s)
-const allowedOrigins = [
-  process.env.FRONTEND_ORIGIN,
-  "http://localhost:5173",
-  "https://travelstoryf.onrender.com"
-].filter(Boolean)
+// const allowedOrigins = [
+//   process.env.FRONTEND_ORIGIN,
+//   "http://localhost:5173",
+//   "https://travelstoryf.onrender.com"
+// ].filter(Boolean)
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, curl, Postman)
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true)
-    }
-    return callback(new Error("Not allowed by CORS"))
-  },
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allow CRUD operations
-  credentials: true, // Allow cookies & authorization headers
-}))
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // allow requests with no origin (like mobile apps, curl, Postman)
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       return callback(null, true)
+//     }
+//     return callback(new Error("Not allowed by CORS"))
+//   },
+//   methods: ["GET", "POST", "PUT", "DELETE"], // Allow CRUD operations
+//   credentials: true, // Allow cookies & authorization headers
+// }))
 
 app.use(cookieParser())
 
@@ -90,10 +136,14 @@ app.use((err, req, res, next) => {
 })
 
 // Start server
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-  console.log(`\n✅ Server is running on port ${PORT}!`)
-  console.log(`📡 API endpoints available at http://localhost:${PORT}/api`)
-  console.log(`🔗 MongoDB: ${process.env.MONGO_URI ? 'Connected' : 'Not configured'}`)
-  console.log(`☁️  Cloudinary: ${process.env.CLOUDINARY_CLOUD_NAME ? 'Configured' : 'Not configured'}\n`)
-})
+// const PORT = process.env.PORT || 3000
+// app.listen(PORT, () => {
+//   console.log(`\n✅ Server is running on port ${PORT}!`)
+//   console.log(`📡 API endpoints available at http://localhost:${PORT}/api`)
+//   console.log(`🔗 MongoDB: ${process.env.MONGO_URI ? 'Connected' : 'Not configured'}`)
+//   console.log(`☁️  Cloudinary: ${process.env.CLOUDINARY_CLOUD_NAME ? 'Configured' : 'Not configured'}\n`)
+// })
+const PORT = process.env.PORT || 4600;
+server.listen(PORT, () => {
+  console.log(`\n✅ Server running on http://localhost:${PORT}`);
+});

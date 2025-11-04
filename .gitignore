@@ -41,7 +41,7 @@ build/
 
 # Frontend specific
 # ... existing code ...
-# # travelAdvisor/public/*.mp4
+# travelAdvisor/public/*.mp4
 # travelAdvisor/.cache/
 # travelAdvisor/.vite/
 
