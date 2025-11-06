@@ -3,12 +3,11 @@ import PasswordInput from "../Scomponent/PasswordInput"
 import { useNavigate } from "react-router-dom"
 import axiosInstance from "../utils/axiosInstance"
 import { validateEmail } from "../utils/helper"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 // import Navbar from "../Scomponent/Navbar"
 
 const SignUp = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -35,7 +34,7 @@ const SignUp = () => {
       return
     }
 
-    setError(null)
+    setError("")
 
     // SignUp API call
     try {
@@ -66,7 +65,7 @@ const SignUp = () => {
     if (!loading && currentUser) {
       navigate("/home")
     }
-  }, [currentUser])
+  }, [currentUser, loading, navigate])
 
   return (
     <div className="h-screen bg-cyan-50 overflow-hidden relative">

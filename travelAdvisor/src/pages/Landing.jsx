@@ -36,8 +36,8 @@ const Landing = () => {
           className="px-6 py-2 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full border border-white/30 hover:bg-white/30 transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer"
           aria-label="Go to Login"
         >
-          Login <t></t>
-          <i class="fa-solid fa-right-to-bracket"></i>
+          Login 
+          <i className="fa-solid fa-right-to-bracket"></i>
         </Link>
       </nav>
 

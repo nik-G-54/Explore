@@ -102,25 +102,44 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(err)
   })
 
-// Enable CORS for frontend(s)
+// // Enable CORS for frontend(s)
+// const allowedOrigins = [
+//   process.env.FRONTEND_ORIGIN,
+//   "http://localhost:5173",
+//   "http://localhost:4173",
+//   "https://travelstoryf.onrender.com"
+// ].filter(Boolean)
+
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // allow requests with no origin (like mobile apps, curl, Postman)
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       return callback(null, true)
+//     }
+//     return callback(new Error("Not allowed by CORS"))
+//   },
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   credentials: true,
+// }))
 const allowedOrigins = [
-  process.env.FRONTEND_ORIGIN,
+  "https://travelstoryf.onrender.com", // deployed frontend
   "http://localhost:5173",
-  "http://localhost:4173",
-  "https://travelstoryf.onrender.com"
-].filter(Boolean)
+  "http://localhost:4173"
+];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, curl, Postman)
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like Postman, mobile)
     if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true)
+      return callback(null, true);
     }
-    return callback(new Error("Not allowed by CORS"))
+    console.warn(`🚫 Blocked by CORS: ${origin}`);
+    return callback(new Error("Not allowed by CORS"));
   },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
-}))
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}));
+
 
 app.use(cookieParser())
 

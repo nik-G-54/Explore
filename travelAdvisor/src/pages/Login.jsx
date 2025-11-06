@@ -34,7 +34,7 @@ const Login = () => {
       return
     }
 
-    setError(null)
+    setError("")
 
     //login.....
     try {
@@ -70,7 +70,7 @@ const Login = () => {
     if (!loading && currentUser) {
       navigate("/home")
     }
-  }, [currentUser])
+  }, [currentUser, loading, navigate])
 
   return (
     <div className="h-screen bg-cyan-50 overflow-hidden relative">
@@ -92,7 +92,7 @@ const Login = () => {
 
         <div className="w-2/4 h-[75vh] bg-white rounded-r-lg relative p-16 shadow-lg shadow-cyan-200/20">
           <form onSubmit={handleSubmit}>
-            <h4 className="text-2xl font-semibold mb-7">Login <i class="fa-solid fa-right-to-bracket"></i></h4>
+            <h4 className="text-2xl font-semibold mb-7">Login <i className="fa-solid fa-right-to-bracket"></i></h4>
 
             <input
               type="email"

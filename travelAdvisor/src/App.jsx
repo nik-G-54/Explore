@@ -39,17 +39,17 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           {/* Public Landing Page */}
-          <Route path="/" exact element={<Landing />} />
+          <Route path="/" element={<Landing />} />
           
           {/* Authenticated Routes */}
           <Route element={<PrivateRoute />}>
-            <Route path="/home" exact element={<Home  />} />
-            <Route path="/all-stories" exact element={<AllStory />} />
+            <Route path="/home" element={<Home  />} />
+            <Route path="/all-stories" element={<AllStory />} />
           </Route>
 
           {/* Public Routes */}
-          <Route path="/login" exact element={<Login />} />
-          <Route path="/sign-up" exact element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
           {/* Place component routes - accessible without authentication */}
           <Route path="/place" element={<Place/>} />
           <Route path="/places" element={<Place/>} />
