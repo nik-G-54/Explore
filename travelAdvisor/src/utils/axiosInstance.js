@@ -16,11 +16,11 @@
 
 import axios from "axios";
 
-const BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
-  (import.meta.env.MODE === "development"
-    ? "http://localhost:4600/api"
-    : "https://lastproject-a4rs.onrender.com/api");
+const BASE_URL ="https://lastproject-a4rs.onrender.com/api"
+  // import.meta.env.VITE_API_BASE_URL ||
+  // (import.meta.env.MODE === "development"
+  //   ? "http://localhost:4600/api"
+  //   : "https://lastproject-a4rs.onrender.com/api");
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
