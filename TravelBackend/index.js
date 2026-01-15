@@ -22,7 +22,7 @@ import ChatMessage from "./models/chatMessage.model.js"
 
 
 
-const server = createServer(app);// it will create a HTTP server request
+const server = createServer(app);// it will create a HTTP server request only not wrap the whole express app
 
 const io = new Server(server, {
     cors: {
@@ -124,7 +124,8 @@ mongoose.connect(process.env.MONGO_URI) // by this line we ad mongo with the bac
 const allowedOrigins = [
   "https://travelstoryf.onrender.com", // deployed frontend
   "http://localhost:5173",
-  "http://localhost:4173"
+  "http://localhost:4173",
+  "http://localhost:8000"
 ];
 
 app.use(cors({
@@ -201,3 +202,30 @@ const PORT = process.env.PORT || 4600;
 server.listen(PORT, () => {
   console.log(`\n✅ Server running on http://localhost:${PORT}`);
 });
+
+
+
+// 1️⃣ Why server.use does not work
+// const server = createServer(app);
+
+// Here:
+
+// server → Node.js HTTP server
+
+// app → Express application
+
+// Node HTTP server:
+
+// does NOT have .use()
+
+// does NOT understand routes
+
+// only knows low-level req, res
+
+// Express app:
+
+// has .use()
+
+// has routing system
+
+// has middleware support
