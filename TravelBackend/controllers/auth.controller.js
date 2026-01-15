@@ -1,11 +1,11 @@
 import bcryptjs from "bcryptjs"
-import User from "../models/user.model.js"
+import User from "../models/user.model.js" // here .js is important otherwise it shows an error  
 import { errorHandler } from "../utils/error.js"
 import jwt from "jsonwebtoken"
 
 export const signup = async (req, res, next) => {
-  const { username, email, password } = req.body
-
+  const { username, email, password } = req.body  // this signup import  in the router.js and export all the values that are taken  
+// during signup time 
   // Debug logging
   console.log("Signup request received")
   console.log("Request body:", req.body)
@@ -35,8 +35,8 @@ export const signup = async (req, res, next) => {
 
   const hashedPassword = bcryptjs.hashSync(password, 10)
 
-  const newUser = new User({
-    username,
+  const newUser = new User({  // here User is comming from User model.js 
+    username,// or we write username:username because both name are same  
     email,
     password: hashedPassword,
   })
@@ -44,7 +44,7 @@ export const signup = async (req, res, next) => {
   try {
     await newUser.save()
 
-    res.status(201).json({
+    res.status(201).json({ /// here we write res.json itmeans we send this data to the client in the json formate 
       success: true,
       message: "Signup successful",
       user: {

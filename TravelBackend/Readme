@@ -9,7 +9,9 @@ url=http://localhost:3000
 
 
 
-
+Q1-when 400 and when 404 
+Ans-  400- when wrong data or missing data 
+404- when route wrong 
 
 
 
