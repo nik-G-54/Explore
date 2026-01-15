@@ -6,7 +6,7 @@ import { validateEmail } from "../utils/helper"
 import { useDispatch, useSelector } from "react-redux"
 // import Navbar from "../Scomponent/Navbar"
 import {
-  //signInFailure,
+  signInFailure,
   signInStart,
   signInSuccess,
 } from "../redux/slice/userSlice"
@@ -49,11 +49,11 @@ const Login = () => {
         dispatch(signInSuccess(response.data))
         navigate("/home")   ///.................................... yha se change krna h navigation 
       } 
-      // else {
-      //   dispatch(signInFailure("An unexpected error occurred!"))
-      // }
+      else {
+        dispatch(signInFailure("An unexpected error occurred!"))
+      }
     } catch (error) {
-     // dispatch(signInFailure("An unexpected error occurred!"))
+      dispatch(signInFailure("An unexpected error occurred!"))
 
       if (
         error.response &&
