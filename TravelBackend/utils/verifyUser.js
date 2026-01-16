@@ -18,3 +18,16 @@ export const verifyToken = (req, res, next) => {
     next()
   })
 }
+
+
+// 🔹 What is user?
+
+// This is the payload inside the JWT, for example:
+
+// {
+//   id: "123",
+//   email: "test@gmail.com",
+//   role: "user",
+//   iat: 1710000000,
+//   exp: 1710003600
+// // }

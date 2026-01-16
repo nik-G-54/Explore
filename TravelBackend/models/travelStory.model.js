@@ -23,7 +23,7 @@ const travelStorySchema = new mongoose.Schema(
     },
 
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId, // Links story to exact user
       ref: "User",
       required: true,
     },
