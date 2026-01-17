@@ -1,6 +1,8 @@
+import "./loadEnv.js"
+
 import express from "express"
 import mongoose from "mongoose"
-import dotenv from "dotenv"
+
 import cookieParser from "cookie-parser"
 import path from "path"
 import cors from "cors"
@@ -13,12 +15,7 @@ import { fileURLToPath } from "url"
 
 const app = express()// this is used to connect express in backend
 
-dotenv.config({
-  path: process.env.NODE_ENV === "production"
-    ? ".env.production"
-    : ".env.development",
-});
-  // by this we connect .envfile {dotenv.config()}
+// by this we connect .envfile {dotenv.config()}
 // from here we add group chat ......................................
 import { createServer } from 'node:http';
 
@@ -30,72 +27,72 @@ import ChatMessage from "./models/chatMessage.model.js"
 const server = createServer(app);// it will create a HTTP server request only not wrap the whole express app
 
 const io = new Server(server, {
-    cors: {
-        origin: '*',
-    }, 
+  cors: {
+    origin: '*',
+  },
 });
 
 const ROOM = 'group';
 
 io.on('connection', (socket) => {
-    console.log('a user connected', socket.id);
+  console.log('a user connected', socket.id);
 
-    socket.on('joinRoom', async (userName) => {
-        console.log(`${userName} is joining the group.`);
+  socket.on('joinRoom', async (userName) => {
+    console.log(`${userName} is joining the group.`);
 
-        await socket.join(ROOM);
+    await socket.join(ROOM);
 
-        // send to all
-        // io.to(ROOM).emit('roomNotice', userName);
+    // send to all
+    // io.to(ROOM).emit('roomNotice', userName);
 
-        // broadcast
-        socket.to(ROOM).emit('roomNotice', userName);
-    });
+    // broadcast
+    socket.to(ROOM).emit('roomNotice', userName);
+  });
 
-    socket.on('requestHistory', async () => {
-        try {
-            const lastMessages = await ChatMessage.find({})
-              .sort({ createdAt: -1 })
-              .limit(100)
-              .lean();
+  socket.on('requestHistory', async () => {
+    try {
+      const lastMessages = await ChatMessage.find({})
+        .sort({ createdAt: -1 })
+        .limit(100)
+        .lean();
 
-            // send in chronological order
-            socket.emit('history', lastMessages.reverse());
-        } catch (e) {
-            console.error('Failed to fetch chat history', e);
-        }
-    });
+      // send in chronological order
+      socket.emit('history', lastMessages.reverse());
+    } catch (e) {
+      console.error('Failed to fetch chat history', e);
+    }
+  });
 
-    socket.on('chatMessage', async (msg) => {
-        try {
-            const doc = await ChatMessage.create({
-                sender: msg.sender,
-                text: msg.text || '',
-                imageUrl: msg.imageUrl || ''
-            });
-            const saved = {
-                id: doc._id.toString(),
-                sender: doc.sender,
-                text: doc.text,
-                imageUrl: doc.imageUrl,
-                ts: doc.createdAt.getTime(),
-            };
-            // echo to others in room
-            socket.to(ROOM).emit('chatMessage', saved);
-            // optionally confirm back to sender with normalized payload
-            socket.emit('chatAck', saved);
-        } catch (e) {
-            console.error('Failed to save chat message', e);
-        }
-    });
+  socket.on('chatMessage', async (msg) => {
+    try {
+      const doc = await ChatMessage.create({
+        sender: msg.sender,
+        text: msg.text || '',
+        imageUrl: msg.imageUrl || ''
+      });
+      const saved = {
+        id: doc._id.toString(),
+        sender: doc.sender,
+        text: doc.text,
+        imageUrl: doc.imageUrl,
+        ts: doc.createdAt.getTime(),
+      };
+      // echo to others in room
+      socket.to(ROOM).emit('chatMessage', saved);
+      // optionally confirm back to sender with normalized payload
+      socket.emit('chatAck', saved);
+    } catch (e) {
+      console.error('Failed to save chat message', e);
+    }
+  });
 
-    socket.on('typing', (userName) => {
-        socket.to(ROOM).emit('typing', userName);
-    });
+  socket.on('typing', (userName) => {
+    socket.to(ROOM).emit('typing', userName);
+  });
 
-    socket.on('stopTyping', (userName) => {
-        socket.to(ROOM).emit('stopTyping', userName);
-    });
+  socket.on('stopTyping', (userName) => {
+    socket.to(ROOM).emit('stopTyping', userName);
+  });
 });
 
 
@@ -193,7 +190,7 @@ app.use((err, req, res, next) => {
     message,
     //...(process.env.NODE_ENV === 'development' && { stack: err.stack })
   })
-}) 
+})
 
 // Start server
 // const PORT = process.env.PORT || 3000
