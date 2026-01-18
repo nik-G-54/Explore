@@ -76,7 +76,7 @@ Redux provides:
 
 
 
-
+Redux helps manage login and signup by maintaining a centralized authentication state that is accessible across the application, ensuring consistent UI updates, secure route protection, and clean separation of logic.”
 
 
 
