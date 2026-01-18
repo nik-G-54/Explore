@@ -44,6 +44,36 @@ A- we are using in pakage.json {
 
 
 
+Q6-why we use reudx 
+A- 1️⃣ The Core Problem Without Redux
+
+In a React application without Redux:
+
+Login state is stored in component state (useState)
+
+After refresh → user gets logged out
+
+Passing auth data via props → prop drilling
+
+Multiple components (Navbar, Profile, Dashboard) need auth info → hard to sync
+
+Example issues:
+
+Navbar does not know user is logged in
+
+Protected routes become complex
+
+State duplication across components
+
+2️⃣ What Redux Solves for Login & Signup
+
+Redux provides:
+✔ Single source of truth
+✔ Global auth state
+✔ Predictable state updates
+✔ Easy access from any component
+
+
 
 
 

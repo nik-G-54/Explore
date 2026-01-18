@@ -66,7 +66,7 @@ const Place = () => {
       return placeRating >= minRating && !isNaN(placeRating)
     })
     
-    console.log(`🔍 Rating filter applied: ${rating}+, showing ${filtered.length} of ${places.length} places`)
+    console.log(` Rating filter applied: ${rating}+, showing ${filtered.length} of ${places.length} places`)
     setFilteredPlaces(filtered)
   }, [rating, places])
 
@@ -81,11 +81,11 @@ const Place = () => {
     console.log(' Current type:', type)
 
     if (!bounds?.ne || !bounds?.sw) {
-      console.warn('⚠️ Missing bounds, skipping data fetch')
+      console.warn(' Missing bounds, skipping data fetch')
       return
     }
     if (!coords?.lat || !coords?.lng) {
-      console.warn('⚠️ Missing coordinates, skipping data fetch')
+      console.warn(' Missing coordinates, skipping data fetch')
       return
     }
 
@@ -188,7 +188,7 @@ const Place = () => {
       }
       // For PlaceAutocompleteElement, the event has place directly
       else if (event.place) {
-        console.log('📍 Using place path')
+        console.log(' Using place path')
         const place = event.place
         
         // Fetch location and viewport fields from the Place object
