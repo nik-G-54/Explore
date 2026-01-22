@@ -43,15 +43,7 @@ npm run dev
 
 > **Note:** The `.env.example` file could not be committed automatically in this environment. Create a `.env` file manually (see below) before running the app.
 
-## 🔑 Environment Variables
 
-Create a `.env` file at the project root and add the following keys:
-
-```env
-VITE_GOOGLE_MAP_API_KEY=your_google_maps_api_key
-VITE_RAPID_API_TRAVEL_API_KEY=your_rapidapi_travel_advisor_key
-VITE_RAPID_API_WEATHER_API_KEY=your_rapidapi_open_weather_key
-```
 
 - **Google Maps JavaScript API**: enable the Maps JavaScript API in the Google Cloud Console and create a browser key.
 - **RapidAPI Travel Advisor**: subscribe to [`travel-advisor` API](https://rapidapi.com/apidojo/api/travel-advisor/).
@@ -95,21 +87,10 @@ travelAdvisor/
 ## 🧪 Testing the Experience
 
 1. Start the dev server: `npm run dev`
-2. Open `http://localhost:5173`
+2. Open `https://travelstoryf.onrender.com`
 3. Allow location access or search for a city via the top-right search bar
 4. Use the filters in the left panel to refine results by type and rating
 5. Click items in the list or markers on the map to highlight places
 
-## 🛟 Troubleshooting
 
-| Issue | Fix |
-| --- | --- |
-| Map isn’t loading / search disabled | Ensure `VITE_GOOGLE_MAP_API_KEY` is set and restart the server |
-| No places returned | Move the map to a different area or reduce filters |
-| Weather icons missing | Confirm the RapidAPI weather key is valid |
-| npm errors about dependencies | Run `npm install` again or delete `node_modules` and reinstall |
-
-## 📄 License
-
-This project is provided as a learning resource. Check individual API terms (Google Maps & RapidAPI) before commercial use.
 
