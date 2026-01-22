@@ -76,6 +76,13 @@ const Navbar = ({
           All Stories 
           <i className="fa-solid fa-photo-film"></i>
         </Link>
+        <Link 
+          to="/React3fiber.jsx" 
+          className="text-blue-600 hover:text-blue-800 font-medium px-3 py-1 rounded hover:bg-blue-50 transition"
+        >
+          React3fiber 
+          <i className="fa-solid fa-photo-film"></i>
+        </Link>
       </div>
       <div className="flex items-center gap-4">
         <Link 
