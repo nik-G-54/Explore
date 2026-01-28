@@ -92,5 +92,26 @@ travelAdvisor/
 4. Use the filters in the left panel to refine results by type and rating
 5. Click items in the list or markers on the map to highlight places
 
+in this we use Redus Presist 
+to store redux data in local storage 
 
+==>>   without Redux 
+User logs in
+↓
+Redux store updated
+↓
+User refreshes page
+↓
+Redux store = EMPTY 😵
+
+==>>> with Redux 
+User logs in
+↓
+Redux store updated
+↓
+State saved in browser storage
+↓
+Page refresh
+↓
+Redux rehydrates state 🎉
 

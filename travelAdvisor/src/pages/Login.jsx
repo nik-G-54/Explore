@@ -22,7 +22,7 @@ const Login = () => {
   const { loading, currentUser } = useSelector((state) => state.user)
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault() // form ka behavior hota h ki submit krne pr page relod krna so on relod information miss n  ho thats why we add this 
 
     if (!validateEmail(email)) {
       setError("Please enter a valid email address.")
@@ -47,7 +47,7 @@ const Login = () => {
 
       if (response.data) {
         dispatch(signInSuccess(response.data))
-      ///  navigate("/home")   ///.................................... yha se change krna h navigation 
+       //  navigate("/home")   ///.................................... yha se change krna h navigation 
       } 
       else {
         dispatch(signInFailure("An unexpected error occurred!"))
@@ -60,7 +60,7 @@ const Login = () => {
         error.response.data &&
         error.response.data.message
       ) {
-        setError(error.response.data.message)
+        setError(error?.response?.data?.message)
       } else {
         setError("Something went wrong. Please try again.")
       }
