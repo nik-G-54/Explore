@@ -33,6 +33,7 @@ import Place from './place/Place'
 import Chat from './chatboat/Chat'
 import Groupchat from "./groupchat/Groupchat"
 import AllStory from "./Home/AllStory"
+import HeroSection from "./components/HeroSection"
 //  import React3fiber from "./react3fiber/react3fiber"
 const App = () => {
   return (
@@ -57,6 +58,7 @@ const App = () => {
           <Route path="/Place" element={<Place/>} />
           <Route path="/Chat" element={<Chat/>} />
           <Route path="/Groupchat" element={<Groupchat/>} />
+          <Route path="/HeroSection" element={<HeroSection/>} />
           {/* <Route path="/React3fiber.jsx" element={<React3fiber/>} /> */}
         </Routes>
       </BrowserRouter>
